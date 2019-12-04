@@ -2,7 +2,7 @@
 
 namespace TagLib
 {
-  public struct Tag
+  public class Tag
   {
     public string Name { get; }
 
