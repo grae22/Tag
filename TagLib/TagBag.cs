@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,7 @@ using TagLib.Exceptions;
 
 namespace TagLib
 {
-  public class TagBag
+  public class TagBag : ITagBagReader
   {
     public IEnumerable<Tag> Tags => _tags;
 
@@ -49,6 +50,16 @@ namespace TagLib
       }
 
       _tags.Remove(tag);
+    }
+
+    public IEnumerator<Tag> GetEnumerator()
+    {
+      return _tags.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
     }
   }
 }

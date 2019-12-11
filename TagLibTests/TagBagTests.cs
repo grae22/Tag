@@ -23,6 +23,7 @@ namespace TagLibTests
 
       // Assert.
       Assert.IsFalse(testObject.Tags.Any());
+      Assert.IsFalse(testObject.Any());
     }
 
     [Test]
@@ -43,11 +44,15 @@ namespace TagLibTests
       testObject.AddTag(tagName);
 
       // Assert.
-      Tag tag = testObject
+      Tag result1 = testObject
         .Tags
         .FirstOrDefault(t => t.Name.Equals(tagName));
 
-      Assert.IsNotNull(tag);
+      Tag result2 = testObject
+        .FirstOrDefault(t => t.Name.Equals(tagName));
+
+      Assert.IsNotNull(result1);
+      Assert.IsNotNull(result2);
     }
 
     [Test]
@@ -90,6 +95,7 @@ namespace TagLibTests
 
       // Assert.
       Assert.AreEqual(1, testObject.Tags.Count());
+      Assert.AreEqual(1, testObject.Count());
     }
 
     [Test]
@@ -129,7 +135,12 @@ namespace TagLibTests
           .Tags
           .FirstOrDefault(t => t.Name.Equals(tagName2)));
 
+      Assert.IsNull(
+        testObject
+          .FirstOrDefault(t => t.Name.Equals(tagName2)));
+
       Assert.AreEqual(2, testObject.Tags.Count());
+      Assert.AreEqual(2, testObject.Count());
     }
 
     [Test]
@@ -169,7 +180,12 @@ namespace TagLibTests
           .Tags
           .FirstOrDefault(t => t.Name.Equals(tagName2)));
 
+      Assert.IsNull(
+        testObject
+          .FirstOrDefault(t => t.Name.Equals(tagName2)));
+
       Assert.AreEqual(2, testObject.Tags.Count());
+      Assert.AreEqual(2, testObject.Count());
     }
 
     [Test]
@@ -205,6 +221,7 @@ namespace TagLibTests
 
       // Assert.
       Assert.AreEqual(3, testObject.Tags.Count());
+      Assert.AreEqual(3, testObject.Count());
     }
   }
 }
