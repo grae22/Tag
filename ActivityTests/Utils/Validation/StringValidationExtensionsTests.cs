@@ -2,7 +2,7 @@
 
 using NUnit.Framework;
 
-using Tag.Utils.Validation;
+using Activity.Utils.Validation;
 
 namespace TagTests.Utils.Validation
 {

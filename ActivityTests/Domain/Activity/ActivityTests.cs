@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace TagTests.Domain.Activity
+namespace ActivityTests.Domain.Activity
 {
   [TestFixture]
   public class ActivityTests

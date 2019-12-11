@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Tag.Utils.Validation;
+using Activity.Utils.Validation;
 
 using TagLib;
 
-namespace Tag.Domain.Activity
+namespace Activity.Domain.Activity
 {
   internal class ActivityType
   {

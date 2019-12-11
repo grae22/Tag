@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tag.Utils.Validation
+namespace Activity.Utils.Validation
 {
   internal static class StringValidationExtensions
   {

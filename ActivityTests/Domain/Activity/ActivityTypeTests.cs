@@ -1,14 +1,14 @@
 ﻿using System.Linq;
 
+using Activity.Domain.Activity;
+
 using NSubstitute;
 
 using NUnit.Framework;
 
-using Tag.Domain.Activity;
-
 using TagLib;
 
-namespace TagTests.Domain.Activity
+namespace ActivityTests.Domain.Activity
 {
   [TestFixture]
   public class ActivityTypeTests
