@@ -9,16 +9,16 @@ namespace Activity.Domain.Activity
   internal class ActivityType
   {
     public string Name { get; }
-    public ITagBagReader DefaultTags { get; }
+    public IReadOnlyTagBag DefaultTags { get; }
 
     public ActivityType(
       in string name,
-      in ITagBagReader defaultTags)
+      in IReadOnlyTagBag defaultTags)
     {
       name.ValidateIsNotNullOrWhitespace(nameof(name));
 
       Name = name;
-      DefaultTags = defaultTags ?? throw new ArgumentNullException(nameof(defaultTags));
+      DefaultTags = defaultTags?.Clone() ?? throw new ArgumentNullException(nameof(defaultTags));
     }
   }
 }

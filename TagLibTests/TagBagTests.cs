@@ -223,5 +223,45 @@ namespace TagLibTests
       Assert.AreEqual(3, testObject.Tags.Count());
       Assert.AreEqual(3, testObject.Count());
     }
+
+    [Test]
+    public void Given_BagWithTags_When_Cloned_Then_CloneBagShouldContainSameTags()
+    {
+      // Arrange.
+      const string tagName1 = "tag1";
+      const string tagName2 = "tag2";
+      const string tagName3 = "tag3";
+
+      var tagFactory = Substitute.For<ITagFactory>();
+
+      tagFactory
+        .GetOrCreate(tagName1)
+        .Returns(new Tag(tagName1));
+
+      tagFactory
+        .GetOrCreate(tagName2)
+        .Returns(new Tag(tagName2));
+
+      tagFactory
+        .GetOrCreate(tagName3)
+        .Returns(new Tag(tagName3));
+
+      var testObject = new TagBag(tagFactory);
+
+      testObject.AddTag(tagName1);
+      testObject.AddTag(tagName2);
+      testObject.AddTag(tagName3);
+
+      // Act.
+      IReadOnlyTagBag clonedBag = testObject.Clone();
+
+      // Assert.
+      Assert.AreEqual(testObject.Count(), clonedBag.Count());
+
+      foreach (var tag in testObject)
+      {
+        Assert.IsTrue(clonedBag.Contains(tag));
+      }
+    }
   }
 }

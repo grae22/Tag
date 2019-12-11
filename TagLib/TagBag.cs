@@ -7,7 +7,7 @@ using TagLib.Exceptions;
 
 namespace TagLib
 {
-  public class TagBag : ITagBagReader
+  public class TagBag : IReadOnlyTagBag
   {
     public IEnumerable<Tag> Tags => _tags;
 
@@ -60,6 +60,18 @@ namespace TagLib
     IEnumerator IEnumerable.GetEnumerator()
     {
       return GetEnumerator();
+    }
+
+    public IReadOnlyTagBag Clone()
+    {
+      var clonedBag = new TagBag(_tagFactory);
+
+      foreach (Tag tag in this)
+      {
+        clonedBag.AddTag(tag.Name);
+      }
+
+      return clonedBag;
     }
   }
 }
