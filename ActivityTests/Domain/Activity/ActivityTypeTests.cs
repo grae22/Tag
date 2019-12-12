@@ -19,10 +19,12 @@ namespace ActivityTests.Domain.Activity
       // Arrange.
       const string name = "TestName";
 
+      var tagFactory = Substitute.For<ITagFactory>();
       var defaultTags = Substitute.For<IReadOnlyTagBag>();
 
       // Act.
       var testObject = new ActivityType(
+        tagFactory,
         name,
         defaultTags);
 
@@ -46,6 +48,7 @@ namespace ActivityTests.Domain.Activity
 
       // Act.
       var testObject = new ActivityType(
+        tagFactory,
         name,
         defaultTags);
 
@@ -57,6 +60,22 @@ namespace ActivityTests.Domain.Activity
 
       Assert.IsNotNull(tag1);
       Assert.IsNotNull(tag2);
+    }
+
+    [Test]
+    public void Given_ExistingType_When_UsedToCreateInstance_Then_CreatesInstanceOfExistingType()
+    {
+      // Arrange.
+      var testObject = new ActivityType(
+        Substitute.For<ITagFactory>(),
+        "TypeName",
+        Substitute.For<IReadOnlyTagBag>());
+
+      // Act.
+      ActivityInstance instance = testObject.CreateInstance();
+
+      // Assert.
+      Assert.AreSame(testObject, instance.ActivityType);
     }
   }
 }

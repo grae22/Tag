@@ -83,5 +83,26 @@ namespace TagLibTests
       Assert.Contains(tag2, result.ToArray());
       Assert.Contains(tag3, result.ToArray());
     }
+
+    [Test]
+    public void Given_TagBagsFromSameFactory_When_CreatingTags_Then_TheyAreTheSameInstances()
+    {
+      // Arrange.
+      const string tagName = "tag";
+
+      var testObject = new TagFactory();
+      var bag1 = testObject.CreateTagBag();
+      var bag2 = testObject.CreateTagBag();
+
+      bag1.AddTag(tagName);
+      bag2.AddTag(tagName);
+
+      // Act.
+      Tag tag1 = bag1.Tags.ElementAt(0);
+      Tag tag2 = bag2.Tags.ElementAt(0);
+
+      // Assert.
+      Assert.AreSame(tag1, tag2);
+    }
   }
 }

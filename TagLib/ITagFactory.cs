@@ -4,5 +4,7 @@
   {
     Tag GetOrCreate(
       in string name);
+
+    TagBag CreateTagBag();
   }
 }

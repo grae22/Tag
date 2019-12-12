@@ -29,5 +29,10 @@ namespace TagLib
 
       return tag;
     }
+
+    public TagBag CreateTagBag()
+    {
+      return new TagBag(this);
+    }
   }
 }
