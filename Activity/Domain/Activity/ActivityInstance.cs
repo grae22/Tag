@@ -1,6 +1,4 @@
-﻿// TODO: Add methods for adding/removing tags.
-
-using System;
+﻿using System;
 
 using TagLib;
 
@@ -29,6 +27,18 @@ namespace Activity.Domain.Activity
       Timestamp = timestamp;
 
       CopyDefaultTagsFromActivityType();
+    }
+
+    public void AddTag(
+      in string name)
+    {
+      _tags.AddTag(name);
+    }
+
+    public void RemoveTag(
+      in string name)
+    {
+      _tags.RemoveTag(name);
     }
 
     private void CopyDefaultTagsFromActivityType()

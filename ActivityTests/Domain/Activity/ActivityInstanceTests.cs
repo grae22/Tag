@@ -95,5 +95,73 @@ namespace ActivityTests.Domain.Activity
       Assert.IsNotNull(testObject.Tags.FirstOrDefault(t => t.Name.Equals(tagName1)));
       Assert.IsNotNull(testObject.Tags.FirstOrDefault(t => t.Name.Equals(tagName2)));
     }
+
+    [Test]
+    public void Given_InstanceWithNoTags_When_TagIsAdded_Then_TagIsPresentOnInstance()
+    {
+      // Arrange.
+      const string typeName = "TypeName";
+      const string tagName = "tag1";
+
+      var tagFactory = new TagFactory();
+      var defaultTags = new TagBag(tagFactory);
+
+      var activityType = new ActivityType(
+        tagFactory,
+        typeName,
+        defaultTags);
+
+      DateTime timestamp = DateTime.Now;
+
+      var testObject = new ActivityInstance(
+        tagFactory,
+        activityType,
+        timestamp);
+
+      // Act.
+      testObject.AddTag(tagName);
+
+      // Assert.
+      Assert
+        .IsNotNull(
+          testObject
+            .Tags
+            .FirstOrDefault(t => t.Name.Equals(tagName)));
+    }
+
+    [Test]
+    public void Given_InstanceWithTag_When_TagIsRemoved_Then_TagIsNotPresentOnInstance()
+    {
+      // Arrange.
+      const string typeName = "TypeName";
+      const string tagName = "tag1";
+
+      var tagFactory = new TagFactory();
+      var defaultTags = new TagBag(tagFactory);
+
+      var activityType = new ActivityType(
+        tagFactory,
+        typeName,
+        defaultTags);
+
+      DateTime timestamp = DateTime.Now;
+
+      var testObject = new ActivityInstance(
+        tagFactory,
+        activityType,
+        timestamp);
+
+      testObject.AddTag(tagName);
+
+      // Act.
+      testObject.RemoveTag(tagName);
+
+      // Assert.
+      Assert
+        .IsNull(
+          testObject
+            .Tags
+            .FirstOrDefault(t => t.Name.Equals(tagName)));
+    }
   }
 }
