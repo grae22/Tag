@@ -1,10 +1,10 @@
 ﻿using System;
 
-using NUnit.Framework;
-
 using Activity.Utils.Validation;
 
-namespace TagTests.Utils.Validation
+using NUnit.Framework;
+
+namespace ActivityTests.Utils.Validation
 {
   [TestFixture]
   public class StringValidationExtensionsTests
@@ -35,6 +35,20 @@ namespace TagTests.Utils.Validation
         .Throws<ArgumentException>(() =>
           whitespaceString.ValidateIsNotNullOrWhitespace(
             nameof(whitespaceString)));
+    }
+
+    [Test]
+    public void Given_ValidString_When_Validated_Then_ArgumentExceptionIsNotRaised()
+    {
+      // Arrange.
+      const string validString = "123";
+
+      // Act.
+      // Assert.
+      Assert
+        .DoesNotThrow(() =>
+          validString.ValidateIsNotNullOrWhitespace(
+            nameof(validString)));
     }
   }
 }

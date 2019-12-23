@@ -8,10 +8,7 @@ namespace Activity.Utils.Validation
       this string argument,
       in string argumentName)
     {
-      if (argument == null)
-      {
-        throw new ArgumentNullException(argumentName);
-      }
+      argument.ValidateIsNotNull(argumentName);
 
       if (string.IsNullOrWhiteSpace(argument))
       {

@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Activity.Utils.Validation;
+
 using TagLib;
 
 namespace Activity.Domain.Activity
@@ -17,10 +19,7 @@ namespace Activity.Domain.Activity
       in ActivityType activityType,
       in DateTime timestamp)
     {
-      if (tagFactory == null)
-      {
-        throw new ArgumentNullException(nameof(tagFactory));
-      }
+      tagFactory.ValidateIsNotNull(nameof(tagFactory));
 
       _tags = tagFactory.CreateTagBag();
       ActivityType = activityType ?? throw new ArgumentNullException(nameof(activityType));
